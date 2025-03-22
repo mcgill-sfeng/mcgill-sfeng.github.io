@@ -80,7 +80,12 @@
             flex-grow: 0;
         }
 
+        .row-styled {
+            gap: 10%;
+        }
+
         .col-styled {
+            min-width: 45%;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -338,8 +343,8 @@
                     </div>
                     <img src="./background1.svg" alt="Background 1" class="background1">
                 </div>
-                <div class="row">
-                    <div class="col-md-6 col-styled">
+                <div class="row row-styled">
+                    <div class="col-styled">
                         <div class="list-header">
                             Top 3 Sales Champions
                         </div>
@@ -358,7 +363,7 @@
                             </li>
                         </ol>
                     </div>
-                    <div class="col-md-6 col-styled">
+                    <div class="col-styled">
                         <div class="list-header">
                             Top 3 Rooms for Growth
                         </div>
