@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Office Supply Sales</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!--<link rel="stylesheet" href="./common.min.css">-->
+    <!--the following style is to be minified to common.min.css after we're done with the changes-->
+    <style>
+        body {
+            font-family: Inter, sans-serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 32px;
+            color: rgb(248, 249, 250);
+        }
+
+        .root {
+            width: 100vw;
+            max-width: 100%;
+            min-height: 100vh;
+            background: rgb(26, 40, 59);
+        }
+
+        .navbar-styled {
+            min-height: 120px;
+            padding: 20px 60px;
+            gap: 60px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.3) 100%);
+            justify-content: start;
+
+        }
+
+        .navbar-title {
+            font-weight: 800;
+            font-size: 48px;
+            display: flex;
+        }
+
+        .navbar-body {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 0px;
+            gap: 16px;
+        }
+
+
+        .navbar-item {
+            font-weight: 600;
+            font-size: 28px;
+            display: flex;
+            padding: 16px;
+            margin-top: 10px;
+        }
+
+        .navbar-item-selected {
+            font-weight: 800;
+        }
+
+        .content {
+            display: flex;
+            justify-content: start;
+            width: 100%;
+            padding: 40px 80px;
+        }
+
+        .root-container>* {
+            margin-bottom: 40px;
+        }
+
+        .root-container:last-child {
+            margin-bottom: 0px;
+        }
+    </style>
+    <!--document specific styles, will stay here-->
+    <style>
+        .background1 {
+            width: 800px;
+            flex-grow: 0;
+        }
+
+        .col-styled {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .radio-group {
+            margin-left: 40px;
+            padding: 20px;
+            flex-grow: 1;
+        }
+
+        .radio-title {
+            font-weight: 800;
+            font-size: 32px;
+            color: rgb(255, 255, 255);
+            margin-bottom: 30px;
+        }
+
+        .radio-box {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .radio-box input[type="radio"] {
+            appearance: none;
+            display: grid;
+            margin: 0;
+            color: rgb(255, 255, 255);
+            width: 28px;
+            height: 28px;
+            border: 2px solid rgb(255, 255, 255);
+            border-radius: 50%;
+            place-content: center;
+        }
+
+        .radio-box input[type="radio"]::before {
+            content: "";
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            transform: scale(0);
+            transition: 500ms transform ease-in-out;
+            box-shadow: inset 1em 1em rgb(255, 255, 255);
+        }
+
+        .radio-box input[type="radio"]:checked::before {
+            transform: scale(1);
+        }
+
+        .radio-box label {
+            font-size: 24px;
+            margin-bottom: 0;
+        }
+
+        .list-header {
+            font-weight: 800;
+            font-size: 32px;
+            color: rgb(255, 255, 255);
+            margin-bottom: 40px;
+        }
+
+        .list-group {
+            list-style-type: none;
+            position: relative;
+            left: 32px;
+            gap: 40px;
+        }
+
+        .list-item {
+            counter-increment: step-counter;
+            height: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 32px;
+            background: linear-gradient(180deg, rgba(244, 244, 243, 0.45) 0%, rgba(233, 233, 233, 0.14) 100%);
+            border-top-right-radius: 33px;
+            border-bottom-right-radius: 33px;
+        }
+
+        .list-item>* {
+            position: relative;
+            left: -96px;
+        }
+
+        .list-item::before {
+            content: counter(step-counter) ". ";
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 64px;
+            height: 60px;
+            position: relative;
+            left: -96px;
+            background: linear-gradient(180deg, rgba(244, 244, 243, 0.45) 0%, rgba(233, 233, 233, 0.14) 100%);
+            border-top-left-radius: 33px;
+            border-bottom-left-radius: 33px;
+        }
+
+        .rep-name-text,
+        .rep-sales-text {
+            width: 140px;
+            transition: 500ms opacity ease-in-out;
+        }
+
+        .rep-name-text {
+            text-align: left;
+        }
+
+        .rep-sales-text {
+            text-align: right;
+            position: relative;
+            left: -12px;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        function populateValues(values) {
+            $("#best-1-name").css('opacity', 0);
+            $("#best-1-sales").css('opacity', 0);
+            $("#best-2-name").css('opacity', 0);
+            $("#best-2-sales").css('opacity', 0);
+            $("#best-3-name").css('opacity', 0);
+            $("#best-3-sales").css('opacity', 0);
+            $("#worst-3-name").css('opacity', 0);
+            $("#worst-3-sales").css('opacity', 0);
+            $("#worst-2-name").css('opacity', 0);
+            $("#worst-2-sales").css('opacity', 0);
+            $("#worst-1-name").css('opacity', 0);
+            $("#worst-1-sales").css('opacity', 0);
+
+            setTimeout(() => {
+                $("#best-1-name").text(values[0].name);
+                $("#best-1-sales").text(values[0].sales);
+                $("#best-2-name").text(values[1].name);
+                $("#best-2-sales").text(values[1].sales);
+                $("#best-3-name").text(values[2].name);
+                $("#best-3-sales").text(values[2].sales);
+                $("#worst-3-name").text(values[3].name);
+                $("#worst-3-sales").text(values[3].sales);
+                $("#worst-2-name").text(values[4].name);
+                $("#worst-2-sales").text(values[4].sales);
+                $("#worst-1-name").text(values[5].name);
+                $("#worst-1-sales").text(values[5].sales);
+
+                $("#best-1-name").css('opacity', 1);
+                $("#best-1-sales").css('opacity', 1);
+                $("#best-2-name").css('opacity', 1);
+                $("#best-2-sales").css('opacity', 1);
+                $("#best-3-name").css('opacity', 1);
+                $("#best-3-sales").css('opacity', 1);
+                $("#worst-3-name").css('opacity', 1);
+                $("#worst-3-sales").css('opacity', 1);
+                $("#worst-2-name").css('opacity', 1);
+                $("#worst-2-sales").css('opacity', 1);
+                $("#worst-1-name").css('opacity', 1);
+                $("#worst-1-sales").css('opacity', 1);
+            }, 500);
+        }
+
+        function onRadioClicked(radio) {
+            switch (radio.value) {
+                case 'all':
+                    populateValues([
+                        { name: 'Kivell', sales: '3109.44$' },
+                        { name: 'Parent', sales: '3102.30$' },
+                        { name: 'Jardine', sales: '2812.19$' },
+                        { name: 'Thmopson', sales: '1203.11$' },
+                        { name: 'Howard', sales: '536.75$' },
+                        { name: 'Andrews', sales: '438.37$' }
+                    ]);
+                    break;
+
+                case 'east':
+                    populateValues([
+                        { name: 'Parent', sales: '3102.30$' },
+                        { name: 'Jones', sales: '2363.04$' },
+                        { name: 'Howard', sales: '536.75$' },
+                        { name: 'N/A', sales: '' },
+                        { name: 'N/A', sales: '' },
+                        { name: 'N/A', sales: '' }
+                    ]);
+                    break;
+
+                case 'central':
+                    populateValues([
+                        { name: 'Kivell', sales: '3109.44$' },
+                        { name: 'Jardine', sales: '2812.19$' },
+                        { name: 'Gill', sales: '1749.87$' },
+                        { name: 'Smith', sales: '1641.43$' },
+                        { name: 'Morgan', sales: '1387.77$' },
+                        { name: 'Andrews', sales: '438.37$' }
+                    ]);
+                    break;
+
+                case 'west':
+                    populateValues([
+                        { name: 'Sorvino', sales: '1283.61$' },
+                        { name: 'Thmopson', sales: '1203.11$' },
+                        { name: 'N/A', sales: '' },
+                        { name: 'N/A', sales: '' },
+                        { name: 'N/A', sales: '' },
+                        { name: 'N/A', sales: '' }
+                    ]);
+                    break;
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div class="root">
+        <nav class="navbar navbar-styled">
+            <div class="navbar-title">Office Supply Sales</div>
+            <div class="navbar-body">
+                <div class="navbar-item navbar-item-selected">Ranking</div>
+                <a class="text-reset navbar-item" href="./maps.html">Maps</a>
+                <a class="text-reset navbar-item" href="./trendline.html">Trendline</a>
+            </div>
+        </nav>
+        <div class="content">
+            <div class="container-fluid root-container">
+                <div class="row">
+                    <div class="radio-group">
+                        <div class="radio-title">Select Region</div>
+                        <div class="radio-box">
+                            <input type="radio" name="region" id="all" value="all" onclick="onRadioClicked(this)"
+                                checked>
+                            <label for="all">
+                                All regions
+                            </label>
+                        </div>
+                        <div class="radio-box">
+                            <input type="radio" name="region" id="east" value="east" onclick="onRadioClicked(this)">
+                            <label for="east">
+                                East
+                            </label>
+                        </div>
+                        <div class="radio-box">
+                            <input type="radio" name="region" id="central" value="central"
+                                onclick="onRadioClicked(this)">
+                            <label for="central">
+                                Central
+                            </label>
+                        </div>
+                        <div class="radio-box">
+                            <input type="radio" name="region" id="west" value="west" onclick="onRadioClicked(this)">
+                            <label for="west">
+                                West
+                            </label>
+                        </div>
+                    </div>
+                    <img src="./background1.svg" alt="Background 1" class="background1">
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-styled">
+                        <div class="list-header">
+                            Top 3 Sales Champions
+                        </div>
+                        <ol class="list-group">
+                            <li class="list-item">
+                                <div class="rep-name-text" id="best-1-name">Kivell</div>
+                                <div class="rep-sales-text" id="best-1-sales">3109.44$</div>
+                            </li>
+                            <li class="list-item">
+                                <div class="rep-name-text" id="best-2-name">Parent</div>
+                                <div class="rep-sales-text" id="best-2-sales">3102.30$</div>
+                            </li>
+                            <li class="list-item">
+                                <div class="rep-name-text" id="best-3-name">Jardine</div>
+                                <div class="rep-sales-text" id="best-3-sales">2812.19$</div>
+                            </li>
+                        </ol>
+                    </div>
+                    <div class="col-md-6 col-styled">
+                        <div class="list-header">
+                            Top 3 Rooms for Growth
+                        </div>
+                        <ol class="list-group">
+                            <li class="list-item">
+                                <div class="rep-name-text" id="worst-1-name">Andrews</div>
+                                <div class="rep-sales-text" id="worst-1-sales">438.37$</div>
+                            </li>
+                            <li class="list-item">
+                                <div class="rep-name-text" id="worst-2-name">Howard</div>
+                                <div class="rep-sales-text" id="worst-2-sales">536.75$</div>
+                            </li>
+                            <li class="list-item">
+                                <div class="rep-name-text" id="worst-3-name">Thmopson</div>
+                                <div class="rep-sales-text" id="worst-3-sales">1203.11$</div>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
