@@ -176,6 +176,13 @@
             background-repeat: no-repeat;
         }
 
+        .map-header {
+            width: 100%;
+            text-align: end;
+            font-size: 48px;
+            font-weight: 800;
+        }
+
         .region {
             display: flex;
             justify-content: center;
@@ -272,11 +279,13 @@
             const value = item.getAttribute("value");
 
             // update dropdown state
+            $(".map-header").text(item.innerText);
+
             const items = [
                 { value: "sales", innerText: "Sales" },
                 { value: "representatives", innerText: "Representatives" },
-                { value: "popularity", innerText: "Item Popularity" },
-                { value: "recent", innerText: "Most Recent Item" }
+                { value: "popularity", innerText: "Most Popular Items" },
+                { value: "recent", innerText: "Most Recent Item Sold" }
             ];
 
             const remaining = items.filter(i => i.value !== value);
@@ -304,7 +313,7 @@
                     east: "Howard, Jones, and Parent"
                 },
                 popularity: {
-                    west: "",
+                    west: "Binder, Desk, Pens",
                     central: "Binder, Pen Set, Pencil",
                     east: "Binder, Pen Set, Pen"
                 },
@@ -390,15 +399,16 @@
                             Representatives
                         </li>
                         <li class="dropdown-item-styled" value="popularity" onclick="onDropdownItemClick(this)">
-                            Item Popularity
+                            Most Popular Items
                         </li>
                         <li class="dropdown-item-styled" value="recent" onclick="onDropdownItemClick(this)">
-                            Most Recent Item
+                            Most Recent Item Sold
                         </li>
                     </ul>
                 </div>
                 <div class="map-container">
                     <div class="map row">
+                        <div class="col-12 map-header">Sales</div>
                         <div class="col-sm-4 region">
                             <input type="checkbox" class="region-checkbox" value="west" />
                             <div class="region-speech-bubble">$2486.72</div>
