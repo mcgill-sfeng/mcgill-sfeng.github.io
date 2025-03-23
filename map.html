@@ -71,7 +71,7 @@
             margin-bottom: 40px;
         }
 
-        .root-container:last-child {
+        .root-container>:last-child {
             margin-bottom: 0px;
         }
     </style>
@@ -240,6 +240,7 @@
             pointer-events: none;
             font-size: 24px;
             z-index: 1;
+            transition: color 0.3s;
         }
 
         .background-container {
@@ -321,15 +322,25 @@
 
             // visual effect
             $(".region-checkbox").each((i, e) => {
-                e.style.setProperty("--color-start", "rgb(48, 63, 81)");
-                e.style.setProperty("--color-end", "rgb(128, 168, 229)");
+                e.style.setProperty("--color-start", "rgb(193, 193, 193)");
+                e.style.setProperty("--color-end", "rgb(255, 255, 255)");
             })
+
+            $(".region-text").each((i, e) => {
+                e.style.color = "rgb(0, 0, 0)";
+                e.style.fontWeight = "600";
+            });
 
             setTimeout(() => {
                 $(".region-checkbox").each((i, e) => {
                     e.style.removeProperty("--color-start");
                     e.style.removeProperty("--color-end");
                 })
+
+                $(".region-text").each((i, e) => {
+                    e.style.removeProperty("color");
+                    e.style.removeProperty("font-weight");
+                });
             }, 300);
         }
 

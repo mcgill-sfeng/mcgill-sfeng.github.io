@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phishing Warning</title>
+    <style>
+        body {
+            background-color: red;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: bold;
+            animation: flash 1s steps(1) infinite alternate;
+        }
+
+        @keyframes flash {
+            0% {
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 0;
+            }
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        function getBrowserInfo() {
+            const ua = navigator.userAgent;
+            let browser = "Unknown";
+            let version = "Unknown";
+            let os = "Unknown";
+
+            if (/Windows NT 10.0/.test(ua)) os = "Windows 10 or later";
+            else if (/Windows NT 6.3/.test(ua)) os = "Windows 8.1";
+            else if (/Windows NT 6.2/.test(ua)) os = "Windows 8";
+            else if (/Windows NT 6.1/.test(ua)) os = "Windows 7";
+            else if (/Mac OS X/.test(ua)) os = "MacOS";
+            else if (/Linux/.test(ua)) os = "Linux";
+            else if (/Android/.test(ua)) os = "Android";
+            else if (/iPhone|iPad|iPod/.test(ua)) os = "iOS";
+
+            if (/Chrome\/(\d+)/.test(ua)) {
+                browser = "Chrome";
+                version = ua.match(/Chrome\/(\d+)/)[1];
+            } else if (/Firefox\/(\d+)/.test(ua)) {
+                browser = "Firefox";
+                version = ua.match(/Firefox\/(\d+)/)[1];
+            } else if (/Safari\/(\d+)/.test(ua) && /AppleWebKit/.test(ua)) {
+                browser = "Safari";
+                version = ua.match(/Version\/(\d+)/)?.[1] || "Unknown";
+            } else if (/Edge\/(\d+)/.test(ua)) {
+                browser = "Edge";
+                version = ua.match(/Edge\/(\d+)/)[1];
+            } else if (/MSIE (\d+)/.test(ua) || /Trident\/.*rv:(\d+)/.test(ua)) {
+                browser = "Internet Explorer";
+                version = ua.match(/MSIE (\d+)/)?.[1] || ua.match(/rv:(\d+)/)?.[1] || "Unknown";
+            }
+
+            return { browser, version, os };
+        }
+
+        $(document).ready(function () {
+            const { browser, version, os } = getBrowserInfo();
+            $("#os-info").text(`You're on ${os}`);
+            $("#browser-info").text(`You're using ${browser} version ${version}`);
+
+            setTimeout(() => {
+                window.location.href = "./trendline.html";
+            }, 10000);
+        });
+    </script>
+</head>
+
+<body>
+    <h1>This link could've been MALICIOUS!</h1>
+    <h2>But I'm nice, so you only get a little surprise... I'll redirect you back in a few seconds.</h2>
+    <h2>Next time, please check before clicking on any link I give you!</h2>
+
+    <h2>Oh, and here's what I see on your browser:</h2>
+    <h2 id="os-info" style="color: #FFFF00;"></h2>
+    <h2 id="browser-info" style="color: #FFFF00;"></h2>
+</body>
+
+</html>
