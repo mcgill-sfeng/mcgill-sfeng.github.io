@@ -1,35 +1,22 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { createTheme, MantineProvider } from "@mantine/core";
+import "@mantine/core/styles.css";
 
-function App() {
-  const [count, setCount] = useState(0)
+import i18n from "./i18n";
+import { PageRouter } from "./pages";
+import { I18nextProvider } from "react-i18next";
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+const theme = createTheme({
+  fontFamily: "Roboto, sans-serif",
+});
 
-export default App
+const App = () => (
+  <>
+    <I18nextProvider i18n={i18n}>
+      <MantineProvider theme={theme}>
+        <PageRouter />
+      </MantineProvider>
+    </I18nextProvider>
+  </>
+);
+
+export default App;

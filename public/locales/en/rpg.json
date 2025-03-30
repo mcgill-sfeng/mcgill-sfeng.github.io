@@ -1,0 +1,5 @@
+{
+    "loadDataModal.title": "Import Data",
+    "loadDataModal.description": "Drag & Drop or <0>Choose file</0> to upload",
+    "loadDataModal.label": "Upload your .json file to begin"
+}
