@@ -1,0 +1,18 @@
+.root {
+    background-color: #228ae6;
+    border-radius: 50%;
+    padding: 8px;
+    color: #ffffff;
+    stroke-width: 3;
+    cursor: pointer;
+    transition: transform ease-in-out 300ms;
+    pointer-events: auto;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+
+.root:active {
+    transition: 0s;
+    transform: translateY(4px);
+}

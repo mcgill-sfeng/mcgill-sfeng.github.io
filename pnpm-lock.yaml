@@ -20,6 +20,9 @@ importers:
       '@mantine/hooks':
         specifier: ^7.17.3
         version: 7.17.3(react@19.0.0)
+      '@react-icons/all-files':
+        specifier: ^4.1.0
+        version: 4.1.0(react@19.0.0)
       i18next:
         specifier: ^24.2.3
         version: 24.2.3(typescript@5.7.3)
@@ -448,6 +451,11 @@ packages:
   '@nodelib/fs.walk@1.2.8':
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
+
+  '@react-icons/all-files@4.1.0':
+    resolution: {integrity: sha512-hxBI2UOuVaI3O/BhQfhtb4kcGn9ft12RWAFVMUeNjqqhLsHvFtzIkFaptBJpFDANTKoDfdVoHTKZDlwKCACbMQ==}
+    peerDependencies:
+      react: '*'
 
   '@rollup/rollup-android-arm-eabi@4.37.0':
     resolution: {integrity: sha512-l7StVw6WAa8l3vA1ov80jyetOAEo1FtHvZDbzXDO/02Sq/QVvqlHkYoFwDJPIMj0GKiistsBudfx5tGFnwYWDQ==}
@@ -1709,6 +1717,10 @@ snapshots:
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.19.1
+
+  '@react-icons/all-files@4.1.0(react@19.0.0)':
+    dependencies:
+      react: 19.0.0
 
   '@rollup/rollup-android-arm-eabi@4.37.0':
     optional: true
