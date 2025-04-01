@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState } from 'react';
 
 type DataContextType = {
   data: any | null; // TODO: implement data type
@@ -17,7 +17,7 @@ const DataContext = createContext<DataContextType>({
 export const useDataContext = () => {
   const context = useContext(DataContext);
   if (!context) {
-    throw new Error("useDataContext must be used within a DataContextProvider");
+    throw new Error('useDataContext must be used within a DataContextProvider');
   }
   return context;
 };
