@@ -46,7 +46,7 @@ export const LoadDataModal = () => {
   return (
     <Modal
       className={styles['modal']}
-      opened={!data}
+      opened={false}
       onClose={() => {}}
       centered
       withCloseButton={false}

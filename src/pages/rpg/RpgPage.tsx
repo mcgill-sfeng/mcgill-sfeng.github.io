@@ -3,6 +3,7 @@ import { Button, Text } from '@mantine/core';
 import { DataContextProvider, useDataContext } from './context';
 import { LoadDataModal } from './load-data-modal';
 import { PageOverlay } from './page-overlay';
+import { PlayerInfo } from './player-info';
 
 const PlaceHolderComponent = () => {
   const { data, setData } = useDataContext();
@@ -24,5 +25,6 @@ export const RpgPage = () => (
     <LoadDataModal />
     <PageOverlay />
     <PlaceHolderComponent />
+    <PlayerInfo />
   </DataContextProvider>
 );
